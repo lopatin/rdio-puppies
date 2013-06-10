@@ -66,14 +66,12 @@ class RdioAPI(object):
     def add_to_collection(self, obj_list):
         keys = []
         tracks = []
-        chunk_list = grouper(obj_list, 20, fill=None)
-        for chunk in chunk_list:
-           for obj in chunk:
-                response = self.client.request('http://api.rdio.com/1/', 'POST', urllib.urlencode({'method': 'search', 'query': obj, 'types': 'Track', 'count': '1'}))
+        for obj in obj_list:
+            response = self.client.request('http://api.rdio.com/1/', 'POST', urllib.urlencode({'method': 'search', 'query': obj, 'types': 'Track', 'count': '1'}))
 
-                r = json.loads(response[1])['result']['results'][0]
-                keys.append(r['key'])
-                tracks.append({"name": str(r["name"]).replace("'",""), "artist": str(r["artist"]).replace("'",""), "icon": str(r["icon"]).replace("'","")})
+            r = json.loads(response[1])['result']['results'][0]
+            keys.append(r['key'])
+            tracks.append({"name": str(r["name"]).replace("'",""), "artist": str(r["artist"]).replace("'",""), "icon": str(r["icon"]).replace("'","")})
 
         keystr = ','.join(keys)
         response = self.client.request('http://api.rdio.com/1/', 'POST', urllib.urlencode({'method': 'addToCollection', 'keys': keystr}))
