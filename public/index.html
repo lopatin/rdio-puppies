@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Puppies</title>
+  <link rel="Shortcut Icon" href="images/favicon.ico"/>
+  <link rel="stylesheet" type="test/css" href="/stylesheets/default.css"/>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript">
+    var uuid = Math.random();
+    function lastfm_form(){
+      $(".info_form.lastfm").show();
+      $(".info_form.pandora").hide();
+      var arrow = document.getElementById('lastfmarrow');
+      arrow.style.visibility = "visible";
+    }
+
+    function pandora_form(){
+      $(".info_form.lastfm").hide();
+      $(".info_form.pandora").show();
+      var arrow = document.getElementById('pandoraarrow');
+      arrow.style.visibility = "visible";
+    }
+
+    function rdio_connect(url){
+      var f = document.getElementById('info_form');
+      var posx = screen.width / 2 - 150;
+      var posy = screen.height / 2 - 250;
+      window.open(url,'_blank','height=400px, width=300px, titlebar=no, location=no, left=' + posx + 'px, top=' + posy + 'px,','false')
+
+      $(".rdio_b").hide();
+      $(".rdio_connect form[name='rdio_connect']").removeClass('hidden');
+    }
+
+    $(function(){
+      $(".rdio_connect .rdio_b").click(function(){
+        $.ajax({
+          type: "POST",
+          url: "/rdio_connect",
+          data: {
+            clientid: uuid
+          },
+          success: function (data) {
+            window.auth_token = (""+data).match(/token=(.*)\b/)[1];
+            rdio_connect(data);
+          }
+        });
+      });
+
+      $("form[name='rdio_connect']").submit(function () {
+        $.ajax({
+          type: "POST",
+          url: "/verify_pin",
+          data: {
+            clientid: uuid,
+            pin: $("input[name='pin']").val()
+          },
+          success: function (data) {
+            window.auth_data = JSON.parse(data).result;
+            typeName(auth_data.firstName);
+            $("#section1").fadeOut(200);
+            setTimeout(function(){
+              $("#section2").fadeIn(200);
+            }, 200);
+          }
+        });
+        return false;
+      });
+
+      $("form[name='lastfm']").submit(function () {
+        var infoform = $(".info_form.lastfm");
+        infoform.find("h2").text("Importing tracks");
+        infoform.find(".content1").hide();
+        infoform.find(".content2").show();
+        $.ajax({
+          type: "POST",
+          url: "/lastfm",
+          data: {
+            clientid: uuid,
+            username: $('.lastfm-name').val()
+          },
+          success: function (data) {
+            var tracks = JSON.parse(data);
+            infoform.find("h2").text("" + tracks.length + " tracks imported!");
+            for (var i = 0; i < tracks.length; i++) {
+              (function (i) {
+                var track = tracks[i];
+                infoform.find(".content3").append("<div class='track'><div class='icon'><img src='"+track.icon+"' /></div><div class='track-name'>"+track.name+"</div><div class='track-artist'>by "+track.artist+"</div><div class='clear'></div></div>");
+              })(i);
+            }
+            infoform.find(".content2").hide();
+            infoform.find(".content3").show();
+          }
+        });
+        return false;
+      });
+
+      $(".info_form.pandora, .info_form.lastfm").hide();
+    });
+
+    function typeName(name) {
+      var arr = (", "+name).split('');
+      console.log(arr);
+      for(var i = 0; i < arr.length; i++) {
+        (function (i) {
+          setTimeout(function () {
+            var w = $("#welcome.page-wrap");
+            w.text(w.text()+arr[i]);
+          }, i*75);
+        })(i);
+      }
+    }
+
+
+  </script>
+</head>
+<body>
+  <div id="Wrapper" class="logged-out">
+    <div id="welcome" class="page-wrap">Welcome to Rdio Puppies</div>  
+    <div id="section1" class="section">
+      <div class="rdio_connect">
+        <div class="main-button rdio_b">Connect to Rdio</div>
+        <form name='rdio_connect' class="hidden"> <input placeholder="Enter PIN here" type="text" name="pin"/> <input type="submit" class="hidden" /> </form>
+        <img src="images/rdio.png"/>
+      </div>
+    </div>
+
+    <div id="section2" class="section">
+      <img id="lastfmarrow" src="images/white-curved-arrow-hi2.png" class="arrow2" style="width: 120px; position:relative; left: 379px; top:221px; visibility: hidden;"/>
+      <img id="pandoraarrow" src="images/white-curved-arrow-hi.png" class="arrow1" style="width:120px; position:relative; left:635px; top:452px; visibility: hidden;"/>
+      <div class="page-wrap">
+        <nav>
+          <ul class="nav">
+            <li><a href="javascript:lastfm_form();" class="icon-music" class="others"><img src="images/lastfm.png" width="10px"/></a></li>
+            <li><a class="rdio icon-music2 rdio_button" style="background-color: transparent; background-image: none; box-shadow: none; width:280px; height:280px;"><img src="images/rdio.png" style="width: 213px; margin-top: 12%; margin-left: 1%;"/></a></li>
+            <li><a href="javascript:pandora_form();" class="icon-music2" class="others"><img src="images/pandora.png"/></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div id="section3" class="section">
+      <div class="info_form lastfm">
+        <h2>Sign In to Last.fm</h2>
+        <div class='content1'><form name='lastfm' class='page-wrap'><fieldset><label for='user'>Last.fm Username:</label><br/><input type="text" name="user" class="lastfm-name"><br/> <input type='submit' value='Get my music!'/> </fieldset> </form></div>
+        <div class='ctnt content2' style="display: none;">
+          <img class="loader" src="images/ajax-loader.gif" />
+        </div>
+        <div class='ctnt content3' style="display: none;">
+        </div>
+      </div>
+      <div class="info_form pandora">
+       <h2><span class='signin'></span>Sign In to Pandora</h2><form class='page-wrap' name='pandora'><fieldset><label for='user'>Pandora Username: </label><br/><input type="text" name="user"/><br/><label for='pass'>Pandora Password:</label><br/><input type='test' name='pass'/><br/><input type='submit' value='Get my music!'/></fieldset></form> 
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

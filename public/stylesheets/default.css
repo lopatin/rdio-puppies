@@ -1,0 +1,345 @@
+body {
+  background: #4E535B;
+  font-family: 'Montserrat', 'Arial';
+  font-size: 1.5em;
+  color: #EC5C93;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  line-height:1.5;
+}
+
+.section {
+  width: 100%;
+}
+
+#section2 {
+  margin-top: -210px;
+  display: none;
+}
+
+.arrow1 img {
+  width: 120px;
+  position: relative;
+  left: 379px;
+  top: 221px;
+}
+
+.arrow2 {
+
+}
+#welcome {
+  text-align:center;
+  text-shadow: 0 2px 17px #999;
+  color: rgb(214, 248, 178);
+  font-size: 2em;
+  font-family: 'Helvetica Neue';
+  line-height: 0;
+}
+
+.rdio_connect {
+  margin: 0 auto;
+  background: #e7e7e7;
+  width: 41%;
+  height:113px;
+  border-radius: 10px;
+  color: rgb(0, 104, 187);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.rdio_connect:hover {
+  background: #f7f7f7;
+  box-shadow: 0 0 4px 5px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.rdio_connect img {
+  width: 20%;
+  float: right;
+  margin-right: 3%;
+  cursor: pointer;
+}
+
+.rdio_connect .main-button {
+  margin-top: 5%;
+  font-size: 1.8em;
+  width: 71%;
+  float: left;
+  margin-left: 5%;
+  text-shadow: 0 1px 3px #998;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+[class*="icon-"] {
+    font-family: 'fontello';
+      font-style: normal;
+        font-size: 3em;
+          speak: none;
+}
+.icon-home:after { content: "\2602"; } 
+.icon-cog:after { content: "\2699"; } 
+.icon-cw:after { content: "\27f3"; } 
+.icon-location:after { content: "\2629"; } 
+/*.icon-music:after { content: "\2669"; }*/
+/*.icon-music2:after { content: "\266B"; }*/
+
+.icon-music img{
+  width:100%;
+  opacity: .8;
+}
+
+.icon-music2 {
+  width: 100%;
+}
+
+.icon-music2 img {
+  width:100%;
+  opacity: .8;
+}
+
+* { 
+    -webkit-box-sizing: border-box; 
+      -moz-box-sizing:    border-box; 
+        box-sizing:         border-box; 
+          margin: 0;
+            padding: 0;
+}
+
+
+a {
+    text-decoration: none;
+      color: #DD6C4F;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
+a:focus { 
+    outline: none;
+}
+
+.page-wrap {
+    width: 960px;
+    margin: 80px auto;
+}
+
+.nav {
+    list-style: none;
+      text-align: center;
+}
+
+.nav li {
+    position: relative;
+      display: inline-block;
+        margin-right: 50px; /* See: http://css-tricks.com/fighting-the-space-between-inline-block-elements/ */
+}
+
+.nav li:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+}
+
+.rdio a {
+  box-shadow: none;
+  background-color: none;
+  background-image: none;
+  display: block;
+  color: #a7a7a7;
+  margin: 36px;
+  width: 144px;
+  height: 144px;
+  position: relative;
+  text-align: center;
+  line-height: 144px;
+  border-radius: 50%;
+}
+.nav a {
+  display: block;
+  background-color: #f7f7f7;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e7e7e7));
+  background-image: -webkit-linear-gradient(top, #f7f7f7, #e7e7e7); 
+  background-image: -moz-linear-gradient(top, #f7f7f7, #e7e7e7); 
+  background-image: -ms-linear-gradient(top, #f7f7f7, #e7e7e7); 
+  background-image: -o-linear-gradient(top, #f7f7f7, #e7e7e7); 
+  color: #a7a7a7;
+  margin: 36px;
+  width: 144px;
+  height: 144px;
+  position: relative;
+  text-align: center;
+  line-height: 144px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
+}
+
+
+.nav a:before {
+  content: "";
+  display: block;
+  background: #fff;
+  border-top: 2px solid #ddd;
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  bottom: -18px;
+  right: -18px;
+  z-index: -1;
+  border-radius: 70%;
+  box-shadow: inset 0px 8px 48px #ddd;
+}
+
+.nav a:hover {
+  text-decoration: none;
+  color: #555;
+  background: #f5f5f5;
+}
+
+.nav img:hover {
+  opacity: 1.0;
+}
+
+
+input {
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+}
+
+/* ---------- LOGIN ---------- */
+
+.info_form {
+  margin: 50px auto;
+  width: 400px;
+}
+
+.info_form h2 {
+  background-color: #EC5C93;
+  -webkit-border-radius: 20px 20px 0 0;
+  -moz-border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 0 0;
+  color: #fff;
+  font-size: 28px;
+  padding: 20px 26px;
+}
+
+.info_form h2 span[class*="signin-"] {
+  margin-right: 14px;
+}
+
+.info_form fieldset {
+  width: 400px;
+  margin-top: -80px;
+  background-color: #e7e7e7;
+  -webkit-border-radius: 0 0 20px 20px;
+  -moz-border-radius: 0 0 20px 20px;
+  border-radius: 0 0 20px 20px;
+  padding: 20px 26px;
+}
+
+.info_form fieldset p {
+  color: #777;
+  margin-bottom: 14px;
+}
+
+.info_form fieldset p:last-child {
+  margin-bottom: 0;
+}
+
+.info_form fieldset input {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.info_form fieldset input[type="user"], .info_form fieldset input[type="pass"] , .info_form fieldset input[type="pin"] {
+  background-color: #eee;
+  color: #777;
+  padding: 4px 10px;
+  width: 328px;
+}
+
+.info_form fieldset input[type="submit"] {
+  background-color: #33cc77;
+  color: #fff;
+  display: block;
+  margin-top: 10px;
+  padding: 4px 0;
+  width: 175px;
+}
+
+.info_form fieldset input[type="submit"]:hover {
+  background-color: #28ad63;
+}
+
+form[name='rdio_connect']{
+  float: left;
+}
+form[name='rdio_connect'] input[type='text']{
+  color: #007FC5;
+  background: transparent;
+  font-size: 30px;
+  margin: 35px;
+}
+form[name='rdio_connect'] input[type='text']:focus{
+  outline: none;
+}
+
+.loader {
+  margin: 50px auto;
+}
+
+.ctnt{
+  background-color: #e7e7e7;
+  margin: 0px;
+  padding: 15px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+}
+
+.track {
+  border-bottom: 1px solid #EC5C93;
+  margin-bottom: 10px;
+}
+.track:last-of-type {
+  border-bottom: 0;
+}
+
+.track .icon {
+  float: left;
+}
+.track .icon img {
+  width: 60px;
+}
+
+.track .track-name {
+  margin-left: 75px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+.track .track-artist {
+  margin-left: 75px;
+  font-size: 15px;
+  color: #333; 
+  text-align: left;
+}
+
+.clear {
+  clear: both;
+}
