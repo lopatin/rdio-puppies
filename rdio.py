@@ -58,16 +58,22 @@ class RdioAPI(object):
 
     def upgrade_client_to_use_access_token(self):
         return oauth.Client(self.consumer, self.access_token)
+    
+    def grouper(iterable, n, fill=None):
+        args = [iter(iterable)]*n
+        return izip_longest(*args, fillvalue=fillvalue)
 
     def add_to_collection(self, obj_list):
         keys = []
         tracks = []
-        for obj in obj_list[0:3]:
-            response = self.client.request('http://api.rdio.com/1/', 'POST', urllib.urlencode({'method': 'search', 'query': obj, 'types': 'Track', 'count': '1'}))
+        chunk_list = grouper(obj_list, 20, fill=None)
+        for chunk in chunk_list:
+           for obj in chunk:
+                response = self.client.request('http://api.rdio.com/1/', 'POST', urllib.urlencode({'method': 'search', 'query': obj, 'types': 'Track', 'count': '1'}))
 
-            r = json.loads(response[1])['result']['results'][0]
-            keys.append(r['key'])
-            tracks.append({"name": str(r["name"]).replace("'",""), "artist": str(r["artist"]).replace("'",""), "icon": str(r["icon"]).replace("'","")})
+                r = json.loads(response[1])['result']['results'][0]
+                keys.append(r['key'])
+                tracks.append({"name": str(r["name"]).replace("'",""), "artist": str(r["artist"]).replace("'",""), "icon": str(r["icon"]).replace("'","")})
 
         keystr = ','.join(keys)
         response = self.client.request('http://api.rdio.com/1/', 'POST', urllib.urlencode({'method': 'addToCollection', 'keys': keystr}))
