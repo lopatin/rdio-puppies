@@ -11,7 +11,7 @@
       $(".info_form.lastfm").show();
       $(".info_form.pandora").hide();
       var arrow = document.getElementById('lastfmarrow');
-      arrow.style.visibility = "visible";
+      $(arrow).show();
     }
 
     function pandora_form(){
@@ -120,17 +120,17 @@
       <div class="rdio_connect">
         <div class="main-button rdio_b">Connect to Rdio</div>
         <form name='rdio_connect' class="hidden"> <input placeholder="Enter PIN here" type="text" name="pin"/> <input type="submit" class="hidden" /> </form>
-        <img src="images/rdio.png"/>
       </div>
     </div>
 
     <div id="section2" class="section">
-      <img id="lastfmarrow" src="images/white-curved-arrow-hi2.png" class="arrow2" style="width: 120px; position:relative; left: 379px; top:221px; visibility: hidden;"/>
       <img id="pandoraarrow" src="images/white-curved-arrow-hi.png" class="arrow1" style="width:120px; position:relative; left:635px; top:452px; visibility: hidden;"/>
       <div class="page-wrap">
         <nav>
           <ul class="nav">
-            <li><a href="javascript:lastfm_form();" class="icon-music" class="others"><img src="images/lastfm.png" width="10px"/></a></li>
+            <li><a href="javascript:lastfm_form();" class="icon-music" class="others"><img src="images/lastfm.png" width="10px"/></a>
+              <img id="lastfmarrow" src="images/white-curved-arrow-hi2.png" class="arrow2" style="width: 120px; display: none;"/>
+            </li>
             <li><a class="rdio icon-music2 rdio_button" style="background-color: transparent; background-image: none; box-shadow: none; width:280px; height:280px;"><img src="images/rdio.png" style="width: 213px; margin-top: 12%; margin-left: 1%;"/></a></li>
             <li><a href="javascript:pandora_form();" class="icon-music2" class="others"><img src="images/pandora.png"/></a></li>
           </ul>

@@ -25,7 +25,9 @@ body {
 }
 
 .arrow2 {
-
+  position: absolute;
+  top: -62px;
+  left: 137px;
 }
 #welcome {
   text-align:center;
@@ -45,12 +47,20 @@ body {
   color: rgb(0, 104, 187);
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  background-image: url("/images/rdio.png");
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: 97% 50%;
 }
 
 .rdio_connect:hover {
   background: #f7f7f7;
   box-shadow: 0 0 4px 5px rgba(0,0,0,0.3);
   cursor: pointer;
+  background-image: url("/images/rdio.png");
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: 97% 50%;
 }
 
 .rdio_connect img {
@@ -61,11 +71,10 @@ body {
 }
 
 .rdio_connect .main-button {
-  margin-top: 5%;
-  font-size: 1.8em;
-  width: 71%;
+  margin-top: 37px;
+  font-size: 27px;
   float: left;
-  margin-left: 5%;
+  margin-left: 8%;
   text-shadow: 0 1px 3px #998;
   cursor: pointer;
 }
